@@ -14,7 +14,15 @@ body {
 	height: 160px;
 } 
 
-badge{
+#titleMain{
+	margin-left: 25px;
+	margin-top: 70px;
+	font-size: 500%;
+	float: left;
+	height: 160px;
+} 
+
+#badge{
 	float: right;
 	background: #F1F2F2;
 	box-shadow: 2px 2px 2px #888888;
@@ -22,21 +30,21 @@ badge{
 	padding: 10px;
 }
 
-badge img{
+#badge img{
 	height: 250px;
 	width: 250px;
 }
 
 
-nav{
-	float: left;
+#nav{
+	float: center;
 	background: #F1F2F2;
 	padding: 20px;
 	box-shadow: 2px 2px 2px #888888;
 	max-width:650px;
 }
 
-nav a{
+#nav a{
 	font-size: 125%;
 	color: #3C3C3C;
 	text-decoration: none;
