@@ -24,12 +24,12 @@ window.onload = function() {
   checkCookie();
 };
 function checkCookie(){
-	var cookie = readCookie("stocks");
-	if(cookie = null){
+	//var cookie = readCookie("stocks");
+	//if(cookie = null){
 		document.getElementById('mainContainer').innerHTML= welcome;
-	}else{
-		populateStocks();
-	}
+	//}else{
+		//populateStocks();
+	//}
 }
 
 //Found http://www.quirksmode.org/js/cookies.html
