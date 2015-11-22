@@ -7,7 +7,7 @@ var welcome = `<div class="demo-card-wide mdl-shadow--2dp">
 					Simply enter the stock tickers to you want to follow.
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
-						<form>
+						<form onsubmit="return false;">
 							<div class="mdl-textfield mdl-js-textfield">
 								<input class="mdl-textfield__input mdl-color-text--primary-dark" type="text" id="tickerInput">GOOG, MSFT, AAPL, SNE...</input>
 							</div>
@@ -40,9 +40,10 @@ window.onload = function() {
   checkCookie();
 };
 function checkCookie(){
+	createCookie("stocks", "GOOG, SNE, MSFT", 30);
+	alert("After creation" + document.cookie);
 	var cookie = readCookie("stocks");
-	alert(cookie);
-	if(cookie == null){
+	if(cookie === null){
 		document.getElementById('mainContainer').innerHTML = welcome;
 	}else{
 		document.getElementById('mainContainer').innerHTML = populateStocks(cookie);
@@ -50,35 +51,33 @@ function checkCookie(){
 }
 
 //Found http://www.quirksmode.org/js/cookies.html
-function createCookie(name,value,days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+value+expires+"; path=/";
+function createCookie(cname,cvalue,days) {
+	var d = new Date();
+    d.setTime(d.getTime() + (days*24*60*60*1000));
+    var expires = "expires="+d.toLocaleString();
+	var cookieString = cname + "=" + cvalue + "; " + expires;
+	alert(cookieString);
+    document.cookie = cookieString;
 }
 
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+function readCookie(cname) {
+	var cookie = document.cookie;
+	var pos = cookie.indexOf(cname);
+	if(pos == -1){
+		return null;
+	}else{
+		var semiPos = cookie.indexOf(";");
+		return cookie.slice(6, semiPos);
 	}
-	return null;
 }
 
-function eraseCookie(name) {
-	createCookie(name,"",-1);
+function eraseCookie() {
+	document.cookie = "stocks=GOOG; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 }
 
 function bakeCookie(){
 	var raw_tickers = document.getElementById("tickerInput").value;
-	alert(raw_tickers);
-	createCookie("stocks", raw_ticker, 5);
+	createCookie("stocks", raw_tickers, 5);
 }
 
 function populateStocks(cookie){
