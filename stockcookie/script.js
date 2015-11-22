@@ -85,7 +85,7 @@ function populateStocks(cookie){
 	var stock_cards = "";
 	for(c = 0; c < stocks.length; c++){
 		var stock = stock_card;
-		stock.replace("[STOCK_TITLE]", stocks[c].trim());
+		stock = stock.replace("[STOCK_TITLE]", stocks[c].trim());
 		stock_cards += stock;
 	}
 	return stock_div.replace("[STOCK_CARDS]",stock_cards);
