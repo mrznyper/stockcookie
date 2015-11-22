@@ -73,6 +73,7 @@ function readCookie(cname) {
 
 function eraseCookie() {
 	document.cookie = "stocks=GOOG; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+	location.reload();
 }
 
 function bakeCookie(){
