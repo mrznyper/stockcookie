@@ -56,7 +56,7 @@ function createCookie(cname,cvalue,days) {
     d.setTime(d.getTime() + (days*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
 	var cookieString = cname + "=" + cvalue + "; " + expires;
-	alert(cookieString);
+	//alert(cookieString);
     document.cookie = cookieString;
 }
 
