@@ -56,6 +56,7 @@ function createCookie(cname,cvalue,days) {
     d.setTime(d.getTime() + (days*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
 	var cookieString = cname + "=" + cvalue + "; " + expires;
+	alert(cookieString);
     document.cookie = cookieString;
 }
 
@@ -65,8 +66,8 @@ function readCookie(cname) {
 	if(pos == -1){
 		return null;
 	}else{
-		var semiPos = cookie.indexOf(";");
-		return cookie.slice(7, semiPos+1);
+		var semiPos = cookie.indexOf(";")+1;
+		return cookie.slice(7, semiPos);
 	}
 }
 
