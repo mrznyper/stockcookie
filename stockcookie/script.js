@@ -7,7 +7,7 @@ var welcome = `<div class="demo-card-wide mdl-shadow--2dp">
 					Simply enter the stock tickers to you want to follow.
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
-						<form onsubmit="return false;">
+						<form>
 							<div class="mdl-textfield mdl-js-textfield">
 								<input class="mdl-textfield__input mdl-color-text--primary-dark" type="text" id="tickerInput">GOOG, MSFT, AAPL, SNE...</input>
 							</div>
