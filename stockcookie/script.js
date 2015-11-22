@@ -40,8 +40,8 @@ window.onload = function() {
   checkCookie();
 };
 function checkCookie(){
-	createCookie("stocks", "GOOG, SNE, MSFT", 30);
-	alert("After creation" + document.cookie);
+	//createCookie("stocks", "GOOG, SNE, MSFT", 30);
+	//alert("After creation" + document.cookie);
 	var cookie = readCookie("stocks");
 	if(cookie === null){
 		document.getElementById('mainContainer').innerHTML = welcome;
@@ -54,7 +54,7 @@ function checkCookie(){
 function createCookie(cname,cvalue,days) {
 	var d = new Date();
     d.setTime(d.getTime() + (days*24*60*60*1000));
-    var expires = "expires="+d.toLocaleString();
+    var expires = "expires="+d.toUTCString();
 	var cookieString = cname + "=" + cvalue + "; " + expires;
 	alert(cookieString);
     document.cookie = cookieString;
@@ -67,7 +67,7 @@ function readCookie(cname) {
 		return null;
 	}else{
 		var semiPos = cookie.indexOf(";");
-		return cookie.slice(6, semiPos);
+		return cookie.slice(7, semiPos);
 	}
 }
 
@@ -81,5 +81,12 @@ function bakeCookie(){
 }
 
 function populateStocks(cookie){
-	return cookie;
+	var stocks = cookie.split(",");
+	var stock_cards = "";
+	for(c = 0; c < stocks.length; c++){
+		var stock = stock_card;
+		stock.replace("[STOCK_TITLE]", stocks[c].trim());
+		stock_cards += stock;
+	}
+	return stock_cards;
 }
