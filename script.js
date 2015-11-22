@@ -41,7 +41,7 @@ window.onload = function() {
 };
 function checkCookie(){
 	//createCookie("stocks", "GOOG, SNE, MSFT", 30);
-	//alert("After creation" + document.cookie);
+	alert("After creation" + document.cookie);
 	var cookie = readCookie("stocks");
 	if(cookie === null){
 		document.getElementById('mainContainer').innerHTML = welcome;
@@ -56,7 +56,6 @@ function createCookie(cname,cvalue,days) {
     d.setTime(d.getTime() + (days*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
 	var cookieString = cname + "=" + cvalue + "; " + expires;
-	//alert(cookieString);
     document.cookie = cookieString;
 }
 
