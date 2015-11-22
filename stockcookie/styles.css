@@ -186,7 +186,7 @@ html, body {
 }
 .mdl-demo .toc {
   border-left: 4px solid #C1EEF4;
-  margin: 24px;
+  margin: 30px;
   padding: 0;
   padding-left: 8px;
   display: flex;
@@ -221,4 +221,5 @@ html, body {
 
 .button_cookie{
 	background: url('images/cookie.png') center / cover;
+	margin-bottom: 5%;
 }
