@@ -42,7 +42,6 @@ function checkCookie(){
 	var cookie = readCookie("stock");
 	if(cookie !== null){
 		document.getElementById("welcome_div").style.visibility = "hidden";
-		document.getElementById('mainContainer').innerHTML = populateStocks(cookie);
 	}else{
 		document.getElementById("clear_button").style.visibility = "hidden";
 	}
@@ -83,10 +82,11 @@ function populateStocks(cookie){
 	stock_cards = "";
 	for(var c = 0; c < stocks.length; c++){
         var ticker = stocks[c].trim();
-		ticker = ticker.toUpperCase();
+				ticker = ticker.toUpperCase();
         queryStock(ticker);
 	}
-	return stock_div.replace("[STOCK_CARDS]",stock_cards);
+	stock_div = stock_div.replace("[STOCK_CARDS]",stock_cards);
+	document.getElementById('mainContainer').innerHTML = stock_div;
 }
 function queryStock(ticker){
     var requestURL ="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"
