@@ -35,10 +35,11 @@ var stock_card = `<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet md
 var stock_div = `<div class="android-card-container mdl-grid">
 				[STOCK_CARDS]	
 				</div>`;
-				
+
 function checkCookie(){
-	createCookie("stocks", "GOOG, SNE, MSFT, TWTR, AAPL", 30);
-    var cookie = readCookie("stocks");
+	//createCookie("stocks", "GOOG, SNE, MSFT, TWTR, AAPL", 30);
+    //var cookie = readCookie("stocks");
+	var cookie = "GOOG, SNE, MSFT, TWTR, AAPL";
 	document.getElementById('mainContainer').innerHTML = populateStocks(cookie);
 }
 
@@ -102,6 +103,10 @@ function queryStock(ticker){
 function fillStockCard(stock_xml){
 		var xml = parser.parseFromString(stock_xml,"text/xml");
     	var stock = stock_card;
+		console.log(stock);
+    	console.log(xml.getElementsByTagName("Name")[0]);
+    	console.log(xml.getElementsByTagName("Name")[0].childNodes[0]);
+    	console.log(xml.getElementsByTagName("Name")[0].childNodes[0].nodeValue);
     	var name = xml.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
         var percent_change = xml.getElementsByTagName("ChangeinPercent")[0].childNodes[0].nodeValue;
 		var price = xml.getElementsByTagName("LastTradePriceOnly")[0].childNodes[0].nodeValue;
