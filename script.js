@@ -100,30 +100,29 @@ function queryStock(ticker){
     var request = new XMLHttpRequest();
     request.open("GET", requestURL, false);
     request.send(null);
-    var stock_xml = request.responseText;
-    return stock_xml;
+    return request.responseText;
 }
 function fillStockCard(stock_xml){
-		var xml = parser.parseFromString(stock_xml,"text/xml");
-    	var stock = stock_card;
-		console.log(xml);
-    	console.log(xml.getElementsByTagName("Name")[0]);
-    	console.log(xml.getElementsByTagName("Name")[0].childNodes[0]);
-    	console.log(xml.getElementsByTagName("Name")[0].childNodes[0].nodeValue);
-    	var name = xml.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
-        var percent_change = xml.getElementsByTagName("ChangeinPercent")[0].childNodes[0].nodeValue;
-		var price = xml.getElementsByTagName("LastTradePriceOnly")[0].childNodes[0].nodeValue;
-    	var symbol = xml.getElementsByTagName("Symbol")[0].childNodes[0].nodeValue;
-    	stock = stock.replace("[STOCK_TITLE]", name);
-    	var change = "";
-    	if(percent_change.charAt(0) == '-'){
-            change = '<p style="color:#990014;">' + percent_change + '</p>';
-        }else{
-        	change = '<p style="color:#519992;">' + percent_change + '</p>';
-        }
-    	var stock_info = '<strong>' + price + '</strong>'
-        				+ '<br>' + change;
-    	stock = stock.replace("[STOCK_TEXT]", stock_info);
-    	stock = stock.replace("[STOCK_LINK]", symbol);
-    	return stock;
+	var xml = parser.parseFromString(stock_xml,"text/xml");
+	var stock = stock_card;
+	console.log(xml);
+	console.log(xml.getElementsByTagName("Name")[0]);
+	console.log(xml.getElementsByTagName("Name")[0].childNodes[0]);
+	console.log(xml.getElementsByTagName("Name")[0].childNodes[0].nodeValue);
+	var name = xml.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+	var percent_change = xml.getElementsByTagName("ChangeinPercent")[0].childNodes[0].nodeValue;
+	var price = xml.getElementsByTagName("LastTradePriceOnly")[0].childNodes[0].nodeValue;
+	var symbol = xml.getElementsByTagName("Symbol")[0].childNodes[0].nodeValue;
+	stock = stock.replace("[STOCK_TITLE]", name);
+	var change = "";
+	if(percent_change.charAt(0) == '-'){
+		change = '<p style="color:#990014;">' + percent_change + '</p>';
+	}else{
+		change = '<p style="color:#519992;">' + percent_change + '</p>';
+	}
+	var stock_info = '<strong>' + price + '</strong>'
+					+ '<br>' + change;
+	stock = stock.replace("[STOCK_TEXT]", stock_info);
+	stock = stock.replace("[STOCK_LINK]", symbol);
+	return stock;
 }
