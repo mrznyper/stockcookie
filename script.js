@@ -32,7 +32,7 @@ var stock_card = `<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet md
 					  </div>
 					</div>`;
 					
-const stock_div = `<div class="android-card-container mdl-grid">
+var stock_div = `<div class="android-card-container mdl-grid">
 				[STOCK_CARDS]	
 				</div>`;
 				
