@@ -101,7 +101,7 @@ function queryStock(ticker){
     var request = new XMLHttpRequest();
     request.open("GET", requestURL, false);
     request.send(null);
-    var stock_xml = request.response;
+    var stock_xml = request.responseText;
     return stock_xml;
 }
 function fillStockCard(stock_xml){
