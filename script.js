@@ -39,8 +39,9 @@ var stock_div = `<div class="android-card-container mdl-grid">
 
 function checkCookie(){
 	//createCookie("stocks", "GOOG, SNE, MSFT, TWTR, AAPL", 30);
-	var cookie = readCookie("stock");
+	var cookie = readCookie("stocks");
 	if(cookie !== null){
+		populateStocks(cookie);
 		document.getElementById("welcome_div").style.visibility = "hidden";
 	}else{
 		document.getElementById("clear_button").style.visibility = "hidden";
