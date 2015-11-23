@@ -109,7 +109,6 @@ function fillStockCard(stock_xml){
         var percent_change = xml.getElementsByTagName("ChangeinPercent")[0].childNodes[0].nodeValue;
 		var price = xml.getElementsByTagName("LastTradePriceOnly")[0].childNodes[0].nodeValue;
     	var symbol = xml.getElementsByTagName("Symbol")[0].childNodes[0].nodeValue;
-    519992
     	stock = stock.replace("[STOCK_TITLE]", name);
     	var change = "";
     	if(percent_change.charAt(0) == '-'){
