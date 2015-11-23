@@ -90,11 +90,29 @@
       <main class="mdl-layout--large-screen-only">
 		<!-- PAGE CONTENTS -->
 		<section class="section--center mdl-grid mdl-color--secondary">
-            <div id="mainContainer">
+			<!-- Welcome Div, to be hidden if cookie exists -->
+			<div id="welcome_div" class="demo-card-wide mdl-shadow--2dp">
+					<div class="mdl-card__title">
+					<h2 class="mdl-card__title-text mdl-color-text--primary-dark">You don't have a cookie!</h2>
+					</div>
+					<div class="mdl-card__supporting-text">
+					<strong>That's ok!</strong><br>
+					Simply enter the stock symbols to you want to follow.
+					</div>
+					<div class="mdl-card__actions mdl-card--border">
+						<form>
+							<div class="mdl-textfield mdl-js-textfield">
+								<input class="mdl-textfield__input mdl-color-text--primary-dark" type="text" id="tickerInput">GOOG, MSFT, AAPL, SNE...</input>
+							</div>
+							<button onclick="bakeCookie()" id="bakeCookieButton" class="button_cookie mdl-button mdl-js-button mdl-button--fab"/>
+						</form>
+					</div>
+					</div>
+			</div>
 			<!-- COMPONENTS GO HERE -->
-				
-			<!-- END COMPONENTS -->
+            <div id="mainContainer">
             </div>
+			<!-- END COMPONENTS -->
 			<button onclick="eraseCookie()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 			Clear Cookie
 			</button>

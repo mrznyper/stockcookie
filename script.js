@@ -39,8 +39,11 @@ var stock_div = `<div class="android-card-container mdl-grid">
 function checkCookie(){
 	//createCookie("stocks", "GOOG, SNE, MSFT, TWTR, AAPL", 30);
     //var cookie = readCookie("stocks");
-	var cookie = "GOOG, SNE, MSFT, TWTR, AAPL";
-	document.getElementById('mainContainer').innerHTML = populateStocks(cookie);
+	var cookie = readCookie("stock");
+	if(cookie !== null){
+		document.getElementById("welcome_div").style.visibility = "hidden";
+		document.getElementById('mainContainer').innerHTML = populateStocks(cookie);
+	}
 }
 
 //Found http://www.quirksmode.org/js/cookies.html
