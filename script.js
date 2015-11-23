@@ -43,6 +43,8 @@ function checkCookie(){
 	if(cookie !== null){
 		document.getElementById("welcome_div").style.visibility = "hidden";
 		document.getElementById('mainContainer').innerHTML = populateStocks(cookie);
+	}else{
+		document.getElementById("clear_button").style.visibility = "hidden";
 	}
 }
 
@@ -52,7 +54,6 @@ function createCookie(cname,cvalue,days) {
     d.setTime(d.getTime() + (days*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
 	var cookieString = cname + "=" + cvalue + "; " + expires;
-	//alert(cookieString);
     document.cookie = cookieString;
 }
 
