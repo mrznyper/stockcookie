@@ -5,7 +5,7 @@ var welcome = `<div class="demo-card-wide mdl-shadow--2dp">
 					</div>
 					<div class="mdl-card__supporting-text">
 					<strong>That's ok!</strong><br>
-					Simply enter the stock tickers to you want to follow.
+					Simply enter the stock symbols to you want to follow.
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
 						<form>
@@ -28,12 +28,11 @@ var stock_card = `<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet md
 					  <div class="mdl-card__actions">
 						 <a class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" href="" data-upgraded=",MaterialButton">
 						   [STOCK_LINK]
-						   <i class="material-icons">chevron_right</i>
 						 </a>
 					  </div>
 					</div>`;
 					
-var stock_div = `<div class="android-card-container mdl-grid">
+const stock_div = `<div class="android-card-container mdl-grid">
 				[STOCK_CARDS]	
 				</div>`;
 				
@@ -45,6 +44,7 @@ function checkCookie(){
     var cookie = readCookie("stocks");
 	document.getElementById('mainContainer').innerHTML = populateStocks(cookie);
 }
+
 //Found http://www.quirksmode.org/js/cookies.html
 function createCookie(cname,cvalue,days) {
 	var d = new Date();
