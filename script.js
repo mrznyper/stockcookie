@@ -40,8 +40,7 @@ window.onload = function() {
   checkCookie();
 };
 function checkCookie(){
-	//createCookie("stocks", "GOOG, SNE, MSFT", 30);
-	alert("After creation" + document.cookie);
+	var docCookie = document.cookie;
 	var cookie = readCookie("stocks");
 	if(cookie === null){
 		document.getElementById('mainContainer').innerHTML = welcome;
