@@ -1,4 +1,5 @@
 var parser = new DOMParser();
+var stock_cards = "";
 var welcome = `<div class="demo-card-wide mdl-shadow--2dp">
 					<div class="mdl-card__title">
 					<h2 class="mdl-card__title-text mdl-color-text--primary-dark">You don't have a cookie!</h2>
@@ -79,17 +80,11 @@ function bakeCookie(){
 
 function populateStocks(cookie){
 	var stocks = cookie.split(",");
-	var stock_cards = "";
+	stock_cards = "";
 	for(var c = 0; c < stocks.length; c++){
         var ticker = stocks[c].trim();
 		ticker = ticker.toUpperCase();
-        console.log(ticker);
-        var stock_xml = queryStock(ticker);
-        if(stock_xml === null){
-            console.log(ticker + " XML was null.");
-        }else{
-            stock_cards += fillStockCard(stock_xml);
-        }
+        queryStock(ticker);
 	}
 	return stock_div.replace("[STOCK_CARDS]",stock_cards);
 }
@@ -98,9 +93,13 @@ function queryStock(ticker){
     + ticker
     + "%22)%0A%09%09&diagnostics=true&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
     var request = new XMLHttpRequest();
-    request.open("GET", requestURL, false);
+	request.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+			fillStockCard(request.responseText);
+		}
+	};
+    request.open("GET", requestURL, true);
     request.send(null);
-    return request.responseText;
 }
 function fillStockCard(stock_xml){
 	var xml = parser.parseFromString(stock_xml,"text/xml");
@@ -124,5 +123,5 @@ function fillStockCard(stock_xml){
 					+ '<br>' + change;
 	stock = stock.replace("[STOCK_TEXT]", stock_info);
 	stock = stock.replace("[STOCK_LINK]", symbol);
-	return stock;
+	stock_cards += stock;
 }
