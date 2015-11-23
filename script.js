@@ -56,6 +56,7 @@ function createCookie(cname,cvalue,days) {
     d.setTime(d.getTime() + (days*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
 	var cookieString = cname + "=" + cvalue + "; " + expires;
+	//alert(cookieString);
     document.cookie = cookieString;
 }
 
@@ -84,9 +85,46 @@ function populateStocks(cookie){
 	var stocks = cookie.split(",");
 	var stock_cards = "";
 	for(var c = 0; c < stocks.length; c++){
-		var stock = stock_card;
-		stock = stock.replace("[STOCK_TITLE]", stocks[c].trim());
-		stock_cards += stock;
+        var ticker = stocks[c].trim();
+		ticker = ticker.toUpperCase();
+        console.log(ticker);
+        var stock_xml = queryStock(ticker);
+        if(stock_xml === null){
+            console.log(ticker + " XML was null.");
+        }else{
+            stock_cards += fillStockCard(stock_xml);
+        }
 	}
 	return stock_div.replace("[STOCK_CARDS]",stock_cards);
+}
+function queryStock(ticker){
+    var requestURL ="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"
+    + ticker
+    + "%22)%0A%09%09&diagnostics=true&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
+    var request = new XMLHttpRequest();
+    request.open("GET", requestURL, false);
+    request.send(null);
+    var stock_xml = request.response;
+    return stock_xml;
+}
+function fillStockCard(stock_xml){
+		var xml = parser.parseFromString(stock_xml,"text/xml");
+    	var stock = stock_card;
+    	var name = xml.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+        var percent_change = xml.getElementsByTagName("ChangeinPercent")[0].childNodes[0].nodeValue;
+		var price = xml.getElementsByTagName("LastTradePriceOnly")[0].childNodes[0].nodeValue;
+    	var symbol = xml.getElementsByTagName("Symbol")[0].childNodes[0].nodeValue;
+    519992
+    	stock = stock.replace("[STOCK_TITLE]", name);
+    	var change = "";
+    	if(percent_change.charAt(0) == '-'){
+            change = '<p style="color:#990014;">' + percent_change + '</p>';
+        }else{
+        	change = '<p style="color:#519992;">' + percent_change + '</p>';
+        }
+    	var stock_info = '<strong>' + price + '</strong>'
+        				+ '<br>' + change;
+    	stock = stock.replace("[STOCK_TEXT]", stock_info);
+    	stock = stock.replace("[STOCK_LINK]", symbol);
+    	return stock;
 }
