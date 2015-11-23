@@ -38,7 +38,6 @@ var stock_div = `<div class="android-card-container mdl-grid">
 
 function checkCookie(){
 	//createCookie("stocks", "GOOG, SNE, MSFT, TWTR, AAPL", 30);
-    //var cookie = readCookie("stocks");
 	var cookie = readCookie("stock");
 	if(cookie !== null){
 		document.getElementById("welcome_div").style.visibility = "hidden";
@@ -107,7 +106,7 @@ function queryStock(ticker){
 function fillStockCard(stock_xml){
 		var xml = parser.parseFromString(stock_xml,"text/xml");
     	var stock = stock_card;
-		console.log(stock);
+		console.log(xml);
     	console.log(xml.getElementsByTagName("Name")[0]);
     	console.log(xml.getElementsByTagName("Name")[0].childNodes[0]);
     	console.log(xml.getElementsByTagName("Name")[0].childNodes[0].nodeValue);
