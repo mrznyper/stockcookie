@@ -1,3 +1,4 @@
+var parser = new DOMParser();
 var welcome = `<div class="demo-card-wide mdl-shadow--2dp">
 					<div class="mdl-card__title">
 					<h2 class="mdl-card__title-text mdl-color-text--primary-dark">You don't have a cookie!</h2>
