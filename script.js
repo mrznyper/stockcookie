@@ -94,7 +94,7 @@ function queryStock(ticker){
     + "%22)%0A%09%09&diagnostics=true&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
     var request = new XMLHttpRequest();
 	request.onreadystatechange = function() {
-		if (xhttp.readyState == 4 && xhttp.status == 200) {
+		if (request.readyState == 4 && request.status == 200) {
 			fillStockCard(request.responseText);
 		}
 	};
