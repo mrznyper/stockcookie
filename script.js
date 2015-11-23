@@ -40,15 +40,10 @@ window.onload = function() {
   checkCookie();
 };
 function checkCookie(){
-	var docCookie = document.cookie;
-	var cookie = readCookie("stocks");
-	if(cookie === null){
-		document.getElementById('mainContainer').innerHTML = welcome;
-	}else{
-		document.getElementById('mainContainer').innerHTML = populateStocks(cookie);
-	}
+	createCookie("stocks", "GOOG, SNE, MSFT, TWTR, AAPL", 30);
+    var cookie = readCookie("stocks");
+	document.getElementById('mainContainer').innerHTML = populateStocks(cookie);
 }
-
 //Found http://www.quirksmode.org/js/cookies.html
 function createCookie(cname,cvalue,days) {
 	var d = new Date();
