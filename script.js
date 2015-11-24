@@ -19,13 +19,14 @@ var test_stocks = "GOOG, SNE, MSFT, TWTR, AAPL";
 function checkCookie(){
 	var cookie = readCookie("stocks");
 	//var cookie = test_stocks;
-	if(cookie !== null){
-		console.log(cookie);
-		queryStocks(cookie);
-		document.getElementById("welcome_div").style.visibility = "hidden";
-	}else{
-		document.getElementById("clear_button").style.visibility = "hidden";
-	}
+	if(cookie !== "")
+		if(cookie !== null ){
+			console.log(cookie);
+			queryStocks(cookie);
+			document.getElementById("welcome_div").style.visibility = "hidden";
+		}else{
+			document.getElementById("clear_button").style.visibility = "hidden";
+		}
 }
 
 //Found http://www.quirksmode.org/js/cookies.html
