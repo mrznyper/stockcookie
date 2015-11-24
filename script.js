@@ -39,7 +39,7 @@ var stock_div = `<div class="android-card-container mdl-grid">
 var test_stocks = "GOOG, SNE, MSFT, TWTR, AAPL";
 function checkCookie(){
 	console.log("Checking cookie.")
-	//var cookie = readCookie("stocks");
+	var cookie = readCookie("stocks");
 	var cookie = test_stocks;
 	if(cookie !== null){
 		queryStocks(cookie);
@@ -94,11 +94,11 @@ function createQuery(cookie){
     var query_first = "select * from csv where url='http://download.finance.yahoo.com/d/quotes.csv?s=";
 	var query_second = "&f=nsl1c&e=.csv' and columns='Name,Symbol,Price,Change'";
     var stock_list = cookie.split(",");
-    console.log(stock_list);
+    //console.log(stock_list);
 	var stocks = "";
     //Clean up stock symbols.
     if(stock_list.length >= 1){
-        console.log(stock_list[0]);
+        //console.log(stock_list[0]);
         stocks = stock_list[0];
         for(var i = 1; i < stock_list.length; i++){
             stock_list[i] = stock_list[i].trim();
@@ -106,10 +106,10 @@ function createQuery(cookie){
             stocks += "," + stock_list[i];
         }
     }
-    console.log(stocks);
+    //console.log(stocks);
     var full_query = query_stem + query_first + stocks + query_second;
     full_query = query_stem + encodeURIComponent(query_first + stocks + query_second);
-    console.log(full_query);
+    //console.log(full_query);
     return full_query;
 }
 function createStockCards(xml){
