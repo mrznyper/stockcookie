@@ -78,6 +78,9 @@ function bakeCookie(){
 	createCookie("stocks", raw_tickers, 5);
 	queryStocks(raw_tickers);
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 0a3dd3e... Minor 2
+=======
 >>>>>>> parent of 0a3dd3e... Minor 2
 =======
 >>>>>>> parent of 0a3dd3e... Minor 2
