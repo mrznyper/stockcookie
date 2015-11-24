@@ -77,6 +77,9 @@ function bakeCookie(){
 	var raw_tickers = document.getElementById("tickerInput").value;
 	createCookie("stocks", raw_tickers, 5);
 	queryStocks(raw_tickers);
+<<<<<<< HEAD
+>>>>>>> parent of 0a3dd3e... Minor 2
+=======
 >>>>>>> parent of 0a3dd3e... Minor 2
 }
 function queryStocks(cookie){
