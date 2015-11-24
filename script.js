@@ -57,29 +57,10 @@ function eraseCookie() {
 }
 
 function bakeCookie(){
-<<<<<<< HEAD
-<<<<<<< HEAD
 	cookie_stocks = document.getElementById("tickerInput").value;
 	console.log("Raw tickers: " + cookie_stocks);
 	queryStocks(cookie_Stocks);
 	createCookie("stocks", cookie_stocks, 5);
-=======
-	var raw_tickers = document.getElementById("tickerInput").value;
-	createCookie("stocks", raw_tickers, 5);
-	queryStocks(raw_tickers);
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 0a3dd3e... Minor 2
-=======
->>>>>>> parent of 0a3dd3e... Minor 2
-=======
->>>>>>> parent of 0a3dd3e... Minor 2
-=======
-	var raw_tickers = document.getElementById("tickerInput").value;
-	console.log("Raw tickers: " + raw_tickers);
-	queryStocks(raw_tickers);
-	createCookie("stocks", raw_tickers, 5);
->>>>>>> parent of 2bc8694... MOAR
 }
 function queryStocks(cookie){
 	var requestURL = createQuery(cookie);
