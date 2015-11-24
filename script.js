@@ -117,7 +117,7 @@ function fillCard(element, stock_cards){
 	}else{
 		change_element = '<p style="color:#519992;">' + change + '</p>';
 	}
-	var stock_info = '<strong>' + price + '</strong>'
+	var stock_info = '<p style="color:black;"><strong>' + price + '</strong></p>'
 					+ '<br>' + change_element;
 	stock = stock.replace("[STOCK_TEXT]", stock_info);
 	stock = stock.replace("[STOCK_LINK]", symbol);
