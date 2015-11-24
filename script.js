@@ -68,10 +68,16 @@ function eraseCookie() {
 }
 
 function bakeCookie(){
+<<<<<<< HEAD
 	cookie_stocks = document.getElementById("tickerInput").value;
 	console.log("Raw tickers: " + cookie_stocks);
 	queryStocks(cookie_Stocks);
 	createCookie("stocks", cookie_stocks, 5);
+=======
+	var raw_tickers = document.getElementById("tickerInput").value;
+	createCookie("stocks", raw_tickers, 5);
+	queryStocks(raw_tickers);
+>>>>>>> parent of 0a3dd3e... Minor 2
 }
 function queryStocks(cookie){
 	var requestURL = createQuery(cookie);
