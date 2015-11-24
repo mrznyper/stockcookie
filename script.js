@@ -64,6 +64,7 @@ function bakeCookie(){
 	console.log("Raw tickers: " + cookie_stocks);
 	queryStocks(cookie_stocks);
 	createCookie("stocks", cookie_stocks, 5);
+	document.getElementById("clear_button").style.visibility = "visible";
 }
 function queryStocks(cookie){
 	var requestURL = createQuery(cookie);
