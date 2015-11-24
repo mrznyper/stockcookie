@@ -40,7 +40,6 @@ var test_stocks = "GOOG, SNE, MSFT, TWTR, AAPL";
 function checkCookie(){
 	//console.log("Checking cookie.")
 	var cookie = readCookie("stocks");
-	//var cookie = test_stocks;
 	if(cookie !== null){
 		queryStocks(cookie);
 		document.getElementById("welcome_div").style.visibility = "hidden";
@@ -70,13 +69,15 @@ function readCookie(cname) {
 }
 
 function eraseCookie() {
-	document.cookie = "stocks=GOOG; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+	document.cookie = "stocks=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	location.reload();
 }
 
 function bakeCookie(){
 	var raw_tickers = document.getElementById("tickerInput").value;
 	createCookie("stocks", raw_tickers, 5);
+	queryStocks(raw_tickers);
+	document.getElementById("welcome_div").style.visibility = "hidden";
 }
 function queryStocks(cookie){
 	var requestURL = createQuery(cookie);
