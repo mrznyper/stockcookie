@@ -17,8 +17,8 @@ var stock_div = `<div class="android-card-container mdl-grid">
 				</div>`;
 var test_stocks = "GOOG, SNE, MSFT, TWTR, AAPL";
 function checkCookie(){
-	//var cookie = readCookie("stocks");
-	var cookie = test_stocks;
+	var cookie = readCookie("stocks");
+	//var cookie = test_stocks;
 	if(cookie !== null){
 		console.log(cookie);
 		queryStocks(cookie);
