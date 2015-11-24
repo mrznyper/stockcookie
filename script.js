@@ -17,8 +17,10 @@ var stock_div = `<div class="android-card-container mdl-grid">
 				</div>`;
 var test_stocks = "GOOG, SNE, MSFT, TWTR, AAPL";
 function checkCookie(){
-	var cookie = readCookie("stocks");
+	//var cookie = readCookie("stocks");
+	var cookie = test_stocks;
 	if(cookie !== null){
+		console.log(cookie);
 		queryStocks(cookie);
 		document.getElementById("welcome_div").style.visibility = "hidden";
 	}else{
@@ -33,6 +35,7 @@ function createCookie(cname,cvalue,days) {
     var expires = "expires="+d.toUTCString();
 	var cookieString = cname + "=" + cvalue + "; " + expires;
     document.cookie = cookieString;
+	console.log("Cookie created: " + cookieString);
 }
 
 function readCookie(cname) {
@@ -42,7 +45,9 @@ function readCookie(cname) {
 		return null;
 	}else{
 		var semiPos = cookie.indexOf(";");
-		return cookie.slice(7, semiPos);
+		var cookieString = cookie.slice(7, semiPos);
+		console.log(cookieString);
+		return cookieString;
 	}
 }
 
@@ -55,7 +60,6 @@ function bakeCookie(){
 	var raw_tickers = document.getElementById("tickerInput").value;
 	createCookie("stocks", raw_tickers, 5);
 	queryStocks(raw_tickers);
-	document.getElementById("welcome_div").style.visibility = "hidden";
 }
 function queryStocks(cookie){
 	var requestURL = createQuery(cookie);
@@ -73,7 +77,7 @@ function createQuery(cookie){
     var query_first = "select * from csv where url='http://download.finance.yahoo.com/d/quotes.csv?s=";
 	var query_second = "&f=nsl1c&e=.csv' and columns='Name,Symbol,Price,Change'";
     var stock_list = cookie.split(",");
-    //console.log(stock_list);
+    console.log(stock_list);
 	var stocks = "";
     //Clean up stock symbols.
     if(stock_list.length >= 1){
