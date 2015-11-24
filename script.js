@@ -24,8 +24,10 @@ function checkCookie(){
 			console.log(cookie);
 			queryStocks(cookie);
 			document.getElementById("welcome_div").style.visibility = "hidden";
+			document.getElementById("clear_button").style.visibility = "visible";
 		}else{
 			document.getElementById("clear_button").style.visibility = "hidden";
+			document.getElementById("welcome_div").style.visibility = "visible";
 		}
 }
 
