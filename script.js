@@ -36,12 +36,13 @@ var stock_card = `<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet md
 var stock_div = `<div class="android-card-container mdl-grid">
 				[STOCK_CARDS]	
 				</div>`;
-
+var test_stocks = "GOOG, SNE, MSFT, TWTR, AAPL";
 function checkCookie(){
-	//createCookie("stocks", "GOOG, SNE, MSFT, TWTR, AAPL", 30);
-	var cookie = readCookie("stocks");
+	console.log("Checking cookie.")
+	//var cookie = readCookie("stocks");
+	var cookie = test_stocks;
 	if(cookie !== null){
-		populateStocks(cookie);
+		showStocks(cookie);
 		document.getElementById("welcome_div").style.visibility = "hidden";
 	}else{
 		document.getElementById("clear_button").style.visibility = "hidden";
@@ -77,52 +78,64 @@ function bakeCookie(){
 	var raw_tickers = document.getElementById("tickerInput").value;
 	createCookie("stocks", raw_tickers, 5);
 }
-
-function populateStocks(cookie){
-	var stocks = cookie.split(",");
-	stock_cards = "";
-	for(var c = 0; c < stocks.length; c++){
-        var ticker = stocks[c].trim();
-				ticker = ticker.toUpperCase();
-        queryStock(ticker);
-	}
-	stock_div = stock_div.replace("[STOCK_CARDS]",stock_cards);
-	document.getElementById('mainContainer').innerHTML = stock_div;
-}
-function queryStock(ticker){
-    var requestURL ="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"
-    + ticker
-    + "%22)%0A%09%09&diagnostics=true&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
-    var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
+function queryStocks(cookie){
+	var requestURL = createQuery(cookie);
+	var request = new XMLHttpRequest();
+	request.onload = function() {
 		if (request.readyState == 4 && request.status == 200) {
-			fillStockCard(request.responseText);
+			createStockCards(request.responseXML);
 		}
 	};
-    request.open("GET", requestURL, true);
-    request.send(null);
+  request.open("GET", requestURL, true);
+  request.send(null);
 }
-function fillStockCard(stock_xml){
-	var xml = parser.parseFromString(stock_xml,"text/xml");
-	var stock = stock_card;
-	console.log(xml);
-	console.log(xml.getElementsByTagName("Name")[0]);
-	console.log(xml.getElementsByTagName("Name")[0].childNodes[0]);
-	console.log(xml.getElementsByTagName("Name")[0].childNodes[0].nodeValue);
-	var name = xml.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
-	var percent_change = xml.getElementsByTagName("ChangeinPercent")[0].childNodes[0].nodeValue;
-	var price = xml.getElementsByTagName("LastTradePriceOnly")[0].childNodes[0].nodeValue;
-	var symbol = xml.getElementsByTagName("Symbol")[0].childNodes[0].nodeValue;
+function createQuery(cookie){
+    var query_stem = "https://query.yahooapis.com/v1/public/yql?q=";
+    var query_first = "select * from csv where url='http://download.finance.yahoo.com/d/quotes.csv?s=";
+	var query_second = "&f=nsl1c&e=.csv' and columns='Name,Symbol,Price,Change'";
+    var stock_list = cookie.split(",");
+    console.log(stock_list);
+	var stocks = "";
+    //Clean up stock symbols.
+    if(stock_list.length >= 1){
+        console.log(stock_list[0]);
+        stocks = stock_list[0];
+        for(var i = 1; i < stock_list.length; i++){
+            stock_list[i] = stock_list[i].trim();
+            stock_list[i] = stock_list[i].toUpperCase();
+            stocks += "," + stock_list[i];
+        }
+    }
+    console.log(stocks);
+    var full_query = query_stem + query_first + stocks + query_second;
+    full_query = query_stem + encodeURIComponent(query_first + stocks + query_second);
+    console.log(full_query);
+    return full_query;
+}
+function createStockCards(xml){
+	var element_list = xml.getElementsByTagName("row");
+    var stock_cards = "";
+    for(var c = 0; c < element_list.length; c++){
+        stock_cards += fillCard(element_list[c]);
+    }
+    document.getElementById("mainContainer").innerHTML = stock_div.replace("[STOCK_CARDS]", stock_cards);
+}
+function fillCard(element, stock_cards){
+	var name = element.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+	var change = element.getElementsByTagName("Change")[0].childNodes[0].nodeValue;
+	var price = element.getElementsByTagName("Price")[0].childNodes[0].nodeValue;
+	var symbol = element.getElementsByTagName("Symbol")[0].childNodes[0].nodeValue;
+    var stock = stock_card;
 	stock = stock.replace("[STOCK_TITLE]", name);
-	var change = "";
-	if(percent_change.charAt(0) == '-'){
-		change = '<p style="color:#990014;">' + percent_change + '</p>';
+	var change_element = "";
+	if(change.charAt(0) == '-'){
+		change_element = '<p style="color:#990014;">' + change + '</p>';
 	}else{
-		change = '<p style="color:#519992;">' + percent_change + '</p>';
+		change_element = '<p style="color:#519992;">' + change + '</p>';
 	}
 	var stock_info = '<strong>' + price + '</strong>'
-					+ '<br>' + change;
+					+ '<br>' + change_element;
 	stock = stock.replace("[STOCK_TEXT]", stock_info);
 	stock = stock.replace("[STOCK_LINK]", symbol);
-	stock_cards += stock;
+	return stock;
 }
