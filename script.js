@@ -42,7 +42,7 @@ function checkCookie(){
 	//var cookie = readCookie("stocks");
 	var cookie = test_stocks;
 	if(cookie !== null){
-		showStocks(cookie);
+		queryStocks(cookie);
 		document.getElementById("welcome_div").style.visibility = "hidden";
 	}else{
 		document.getElementById("clear_button").style.visibility = "hidden";
