@@ -58,8 +58,9 @@ function eraseCookie() {
 
 function bakeCookie(){
 	var raw_tickers = document.getElementById("tickerInput").value;
-	createCookie("stocks", raw_tickers, 5);
+	console.log("Raw tickers: " + raw_tickers);
 	queryStocks(raw_tickers);
+	createCookie("stocks", raw_tickers, 5);
 }
 function queryStocks(cookie){
 	var requestURL = createQuery(cookie);
