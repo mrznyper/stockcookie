@@ -1,24 +1,3 @@
-var parser = new DOMParser();
-var stock_cards = "";
-var welcome = `<div class="demo-card-wide mdl-shadow--2dp">
-					<div class="mdl-card__title">
-					<h2 class="mdl-card__title-text mdl-color-text--primary-dark">You don't have a cookie!</h2>
-					</div>
-					<div class="mdl-card__supporting-text">
-					<strong>That's ok!</strong><br>
-					Simply enter the stock symbols to you want to follow.
-					</div>
-					<div class="mdl-card__actions mdl-card--border">
-						<form>
-							<div class="mdl-textfield mdl-js-textfield">
-								<input class="mdl-textfield__input mdl-color-text--primary-dark" type="text" id="tickerInput">GOOG, MSFT, AAPL, SNE...</input>
-							</div>
-							<button onclick="bakeCookie()" id="bakeCookieButton" class="button_cookie mdl-button mdl-js-button mdl-button--fab"/>
-						</form>
-					</div>
-					</div>
-				</div>`;
-
 var stock_card = `<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
 					  <div class="mdl-card__title">
 						 <h4 class="mdl-card__title-text">[STOCK_TITLE]</h4>
@@ -38,7 +17,6 @@ var stock_div = `<div class="android-card-container mdl-grid">
 				</div>`;
 var test_stocks = "GOOG, SNE, MSFT, TWTR, AAPL";
 function checkCookie(){
-	//console.log("Checking cookie.")
 	var cookie = readCookie("stocks");
 	if(cookie !== null){
 		queryStocks(cookie);
