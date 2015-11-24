@@ -16,26 +16,15 @@ var stock_div = `<div class="android-card-container mdl-grid">
 				[STOCK_CARDS]	
 				</div>`;
 var test_stocks = "GOOG, SNE, MSFT, TWTR, AAPL";
-var cookie_stocks = "";
 function checkCookie(){
 	var cookie = readCookie("stocks");
 	//var cookie = test_stocks;
-	if(cookie !== "")
-		if(cookie !== null){
-			console.log(cookie);
-			queryStocks(cookie);
-			document.getElementById("welcome_div").style.visibility = "hidden";
-		}else{
-			document.getElementById("clear_button").style.visibility = "hidden";
-		}
-	else{
-		if(cookie_stocks !== ""){
-			console.log(cookie_stocks);
-			queryStocks(cookie_stocks);
-			document.getElementById("welcome_div").style.visibility = "hidden";
-		}else{
-			document.getElementById("clear_button").style.visibility = "hidden";
-		}
+	if(cookie !== null){
+		console.log(cookie);
+		queryStocks(cookie);
+		document.getElementById("welcome_div").style.visibility = "hidden";
+	}else{
+		document.getElementById("clear_button").style.visibility = "hidden";
 	}
 }
 
@@ -69,6 +58,7 @@ function eraseCookie() {
 
 function bakeCookie(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 	cookie_stocks = document.getElementById("tickerInput").value;
 	console.log("Raw tickers: " + cookie_stocks);
 	queryStocks(cookie_Stocks);
@@ -84,6 +74,12 @@ function bakeCookie(){
 >>>>>>> parent of 0a3dd3e... Minor 2
 =======
 >>>>>>> parent of 0a3dd3e... Minor 2
+=======
+	var raw_tickers = document.getElementById("tickerInput").value;
+	console.log("Raw tickers: " + raw_tickers);
+	queryStocks(raw_tickers);
+	createCookie("stocks", raw_tickers, 5);
+>>>>>>> parent of 2bc8694... MOAR
 }
 function queryStocks(cookie){
 	var requestURL = createQuery(cookie);
