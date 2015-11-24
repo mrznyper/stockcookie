@@ -57,7 +57,7 @@ function eraseCookie() {
 }
 
 function bakeCookie(){
-	cookie_stocks = document.getElementById("tickerInput").value;
+	var cookie_stocks = document.getElementById("tickerInput").value;
 	console.log("Raw tickers: " + cookie_stocks);
 	queryStocks(cookie_Stocks);
 	createCookie("stocks", cookie_stocks, 5);
